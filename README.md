@@ -27,3 +27,25 @@ Método HTTP: GET
 2. Configurar VITE_COUNTRIES_API_KEY en .env.local
 3. Autorizar localhost en la configuración de la API
 4. Ejecutar npm run dev
+
+
+## Avance - Segunda práctica
+
+Se implementó la visualización de países en React
+a partir de los datos obtenidos de REST Countries
+
+### Funcionalidades implementadas
+
+- Petición HTTP GET mediante fetch y useEffect
+- Manejo de datos con useState
+- Estado de carga durante la consulta
+- Manejo de errores de la API
+- Renderizado dinámico mediante map()
+- Uso del código ISO como key única
+- Visualización de bandera, nombre, región y población
+
+### Estados de la aplicación
+
+1. Cargando: mientras se realiza la petición
+2. Datos: cuando la API responde correctamente
+3. Error: cuando ocurre un problema con la petición

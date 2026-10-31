@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 const API_URL =
-  "https://api.restcountries.com/countries/v5" +
+  "https://api.restcountries.com/countries/v" +
   "?limit=12" +
   "&response_fields=names.common,codes.alpha_2,flag.url_png,region,population";
 
@@ -27,10 +27,6 @@ function App() {
           signal: controller.signal,
         });
 
-        const json = await respuesta.json();
-
-        console.log("Respuesta de REST Countries:", json);
-
         if (!respuesta.ok) {
           throw new Error(
             json.errors?.[0]?.message ||
@@ -38,12 +34,16 @@ function App() {
           );
         }
 
+        const json = await respuesta.json();
+        console.log("Respuesta de REST Countries:", json);
         setPaises(json.data.objects);
 
       } catch (err) {
-        if (err.name !== "AbortError") {
-          console.error("Error al obtener países:", err);
-          setError(err.message);
+        if (!controller.signal.aborted) {
+          console.error(err);
+          setError(
+            "No se pudieron cargar los países"
+          );
         }
       } finally {
         if (!controller.signal.aborted) {
